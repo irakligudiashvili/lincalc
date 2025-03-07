@@ -12,7 +12,7 @@ function App() {
   return (
     <div>
       <nav>
-        <Link to="/">Home</Link>
+        <Link to="/" id="home">linCalc()</Link>
         <Link to="/about">About</Link>
       </nav>
 
