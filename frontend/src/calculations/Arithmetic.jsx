@@ -9,13 +9,29 @@ function Arithmetic(){
 
     const addRowMatrix1 = () => setMatrix1Rows((prev) => prev + 1);
     const addColumnMatrix1 = () => setMatrix1Cols((prev) => prev + 1);
-    const removeRowMatrix1 = () => setMatrix1Rows((prev) => prev - 1);
-    const removeColumnMatrix1 = () => setMatrix1Cols((prev) => prev - 1);
+    const removeRowMatrix1 = () => {
+        if(matrix1Rows > 1){
+            setMatrix1Rows((prev) => prev - 1);
+        }
+    }
+    const removeColumnMatrix1 = () => {
+        if(matrix1Cols > 1){
+            setMatrix1Cols((prev) => prev - 1);
+        }
+    };
 
     const addRowMatrix2 = () => setMatrix2Rows((prev) => prev + 1);
     const addColumnMatrix2 = () => setMatrix2Cols((prev) => prev + 1);
-    const removeRowMatrix2 = () => setMatrix2Rows((prev) => prev - 1);
-    const removeColumnMatrix2 = () => setMatrix2Cols((prev) => prev - 1);
+    const removeRowMatrix2 = () => {
+        if(matrix2Rows > 1){
+            setMatrix2Rows((prev) => prev - 1);
+        }
+    };
+    const removeColumnMatrix2 = () => {
+        if(matrix2Cols > 1){
+            setMatrix2Cols((prev) => prev - 1);
+        }
+    };
 
     return <div className="container d-flex flex-column justify-content-center align-items-center py-3">
         {/* Matrix 1 */}
@@ -74,6 +90,8 @@ function Arithmetic(){
                 </div>
             </div>
         </div>
+
+        <button className="btn btn-info">Calc()</button>
 
         <div className="">
             <h3 className="py-3">Result</h3>
