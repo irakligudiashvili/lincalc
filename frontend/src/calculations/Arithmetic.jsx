@@ -33,6 +33,14 @@ function Arithmetic(){
         }
     };
 
+    const generateResult = () => {
+        if(matrix1Cols == matrix2Cols && matrix1Rows == matrix2Rows){
+            console.log('Calculating');
+        } else {
+            console.log('Error')
+        }
+    }
+
     return <div className="container d-flex flex-column justify-content-center align-items-center py-3">
         {/* Matrix 1 */}
         <div className="border-3 border-start border-end border-dark rounded-pill px-5 py-3">
@@ -91,7 +99,7 @@ function Arithmetic(){
             </div>
         </div>
 
-        <button className="btn btn-info">Calc()</button>
+        <button className="btn btn-info" onClick={generateResult}>Calc()</button>
 
         <div className="">
             <h3 className="py-3">Result</h3>
