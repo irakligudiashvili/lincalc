@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 function Arithmetic(){
     const [matrix1Rows, setMatrix1Rows] = useState(2)
@@ -7,13 +7,20 @@ function Arithmetic(){
     const [matrix2Rows, setMatrix2Rows] = useState(2)
     const [matrix2Cols, setMatrix2Cols] = useState(2)
 
-    const [matrix1, setMatrix1] = useState(Array(matrix1Rows).fill(Array(matrix1Cols).fill('')));
-    const [matrix2, setMatrix2] = useState(Array(matrix2Rows).fill(Array(matrix2Cols).fill('')));
+    const [matrix1, setMatrix1] = useState(Array(matrix1Rows).fill().map(() => Array(matrix1Cols).fill('')));
+    const [matrix2, setMatrix2] = useState(Array(matrix2Rows).fill().map(() => Array(matrix2Cols).fill('')));
 
     const [operation, setOperation] = useState('add')
     const [result, setResult] = useState(null)
 
-    const addRowMatrix1 = () => setMatrix1Rows((prev) => prev + 1);
+    const addRowMatrix1 = () => {
+        setMatrix1Rows(prev => prev + 1);
+        setMatrix1(prevMatrix => {
+          const newMatrix = [...prevMatrix];
+          newMatrix.push(Array(matrix1Cols).fill(''));
+          return newMatrix;
+        });
+      };
     const addColumnMatrix1 = () => setMatrix1Cols((prev) => prev + 1);
     const removeRowMatrix1 = () => {
         if(matrix1Rows > 1){
@@ -26,7 +33,14 @@ function Arithmetic(){
         }
     };
 
-    const addRowMatrix2 = () => setMatrix2Rows((prev) => prev + 1);
+    const addRowMatrix2 = () => {
+        setMatrix2Rows(prev => prev + 1);
+        setMatrix2(prevMatrix => {
+          const newMatrix = [...prevMatrix];
+          newMatrix.push(Array(matrix2Cols).fill(''));
+          return newMatrix;
+        });
+      };
     const addColumnMatrix2 = () => setMatrix2Cols((prev) => prev + 1);
     const removeRowMatrix2 = () => {
         if(matrix2Rows > 1){
@@ -38,6 +52,27 @@ function Arithmetic(){
             setMatrix2Cols((prev) => prev - 1);
         }
     };
+    
+    useEffect(() => {
+        setMatrix1(prevMatrix => {
+            return Array.from({ length: matrix1Rows }, (_, rowIndex) =>
+                Array.from({ length: matrix1Cols }, (_, colIndex) =>
+                    (prevMatrix[rowIndex]?.[colIndex] !== undefined ? prevMatrix[rowIndex][colIndex] : '')
+                )
+            );
+        });
+    }, [matrix1Rows, matrix1Cols]);
+    
+    useEffect(() => {
+        setMatrix2(prevMatrix => {
+            return Array.from({ length: matrix2Rows }, (_, rowIndex) =>
+                Array.from({ length: matrix2Cols }, (_, colIndex) =>
+                    (prevMatrix[rowIndex]?.[colIndex] !== undefined ? prevMatrix[rowIndex][colIndex] : '')
+                )
+            );
+        });
+    }, [matrix2Rows, matrix2Cols]);
+    
 
     const handleMatrix1Change = (rowIndex, colIndex, value) => {
         const newMatrix1 = matrix1.map((row, rIndex) =>
@@ -63,6 +98,10 @@ function Arithmetic(){
         setOperation(e.target.value);
     }
 
+    const isMatrixFilled = (matrix) => {
+        return matrix.every(row => row.every(cell => cell.trim() !== ''));
+    }
+
     const generateResult = () => {
         if(matrix1Cols == matrix2Cols && matrix1Rows == matrix2Rows){
             console.log('Calculating')
@@ -82,14 +121,14 @@ function Arithmetic(){
             })
             .then((response) => response.json())
             .then((data) => {
-                console.log(data.result)
+                setResult(data.result)
             })
             .catch((error) => {
-                console.error('Error:', error)
+                setResult(error)
             });
         } else {
-            console.log('Error: Matrices dimenions do not match')
-            setResult(null)
+            console.log('Error: Matrices dimensions do not match')
+            setResult('Error: Matrices dimensions do not match')
         }
     }
 
@@ -159,17 +198,31 @@ function Arithmetic(){
             </div>
         </div>
 
-        <button className="btn btn-info" onClick={generateResult}>Calc()</button>
+        <button className="btn btn-info" onClick={generateResult} disabled={!isMatrixFilled(matrix1) || !isMatrixFilled(matrix2)}>
+            Calc()
+        </button>
 
         <div className="">
             <h3 className="py-3">Result</h3>
 
             {/* Result Matrix */}
             <div className="border-3 border-start border-end border-dark rounded-pill px-5 py-3">
-                {result && (
-                    <div>
-                        <pre>{JSON.stringify(result, null, 2)}</pre>
-                    </div>
+                {result && Array.isArray(result) ? (
+                    <table className="table table-bordered table-striped text-center">
+                        <tbody>
+                            {result.map((row, rowIndex) => (
+                                <tr key={`result-row-${rowIndex}`}>
+                                    {row.map((cell, colIndex) => (
+                                        <td key={`result-cell-${rowIndex}-${colIndex}`} className="px-3 py-2">
+                                            {cell}
+                                        </td>
+                                    ))}
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                ) : (
+                    <p>{result}</p>
                 )}
             </div>
         </div>
