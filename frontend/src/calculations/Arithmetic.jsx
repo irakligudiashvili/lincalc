@@ -7,6 +7,12 @@ function Arithmetic(){
     const [matrix2Rows, setMatrix2Rows] = useState(2)
     const [matrix2Cols, setMatrix2Cols] = useState(2)
 
+    const [matrix1, setMatrix1] = useState(Array(matrix1Rows).fill(Array(matrix1Cols).fill('')));
+    const [matrix2, setMatrix2] = useState(Array(matrix2Rows).fill(Array(matrix2Cols).fill('')));
+
+    const [operation, setOperation] = useState('add')
+    const [result, setResult] = useState(null)
+
     const addRowMatrix1 = () => setMatrix1Rows((prev) => prev + 1);
     const addColumnMatrix1 = () => setMatrix1Cols((prev) => prev + 1);
     const removeRowMatrix1 = () => {
@@ -33,11 +39,57 @@ function Arithmetic(){
         }
     };
 
+    const handleMatrix1Change = (rowIndex, colIndex, value) => {
+        const newMatrix1 = matrix1.map((row, rIndex) =>
+            rIndex === rowIndex
+                ? row.map((cell, cIndex) => (cIndex === colIndex ? value : cell))
+                : row
+        );
+
+        setMatrix1(newMatrix1);
+    }
+
+    const handleMatrix2Change = (rowIndex, colIndex, value) => {
+        const newMatrix2 = matrix2.map((row, rIndex) =>
+            rIndex === rowIndex
+                ? row.map((cell, cIndex) => (cIndex === colIndex ? value : cell))
+                : row
+        );
+
+        setMatrix2(newMatrix2);
+    }
+
+    const handleOperationChange = (e) => {
+        setOperation(e.target.value);
+    }
+
     const generateResult = () => {
         if(matrix1Cols == matrix2Cols && matrix1Rows == matrix2Rows){
-            console.log('Calculating');
+            console.log('Calculating')
+
+            const requestData = {
+                matrix1: matrix1,
+                matrix2: matrix2,
+                operation: operation,
+            };
+
+            fetch("http://127.0.0.1:8000/arithmetic", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestData)
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data.result)
+            })
+            .catch((error) => {
+                console.error('Error:', error)
+            });
         } else {
-            console.log('Error')
+            console.log('Error: Matrices dimenions do not match')
+            setResult(null)
         }
     }
 
@@ -50,6 +102,10 @@ function Arithmetic(){
                     <input
                         key={`matrix1-${rowIndex}-${colIndex}`}
                         className="form-control form-control-sm mx-3"
+                        value={matrix1[rowIndex][colIndex]}
+                        onChange={(e) =>
+                            handleMatrix1Change(rowIndex, colIndex, e.target.value)
+                        }
                     />
                     ))}
                 </div>
@@ -68,9 +124,9 @@ function Arithmetic(){
         </div>
 
         <div className="py-5">
-            <select>
-                <option>Addition</option>
-                <option>Subtraction</option>
+            <select value={operation} onChange={handleOperationChange}>
+                <option value={'add'}>Addition</option>
+                <option value={'subtract'}>Subtraction</option>
             </select>
         </div>
 
@@ -82,6 +138,10 @@ function Arithmetic(){
                     <input
                         key={`matrix2-${rowIndex}-${colIndex}`}
                         className="form-control form-control-sm mx-3"
+                        value={matrix2[rowIndex][colIndex]}
+                        onChange={(e) =>
+                            handleMatrix2Change(rowIndex, colIndex, e.target.value)
+                        }
                     />
                     ))}
                 </div>
@@ -106,15 +166,11 @@ function Arithmetic(){
 
             {/* Result Matrix */}
             <div className="border-3 border-start border-end border-dark rounded-pill px-5 py-3">
-                <div className="d-flex py-2">
-                    <input className="form-control form-control-sm mx-3 w-10"></input>
-                    <input className="form-control form-control-sm mx-3 w-10"></input>
-                </div>
-
-                <div className="d-flex py-2">
-                    <input className="form-control form-control-sm mx-3 w-10"></input>
-                    <input className="form-control form-control-sm mx-3 w-10"></input>
-                </div>
+                {result && (
+                    <div>
+                        <pre>{JSON.stringify(result, null, 2)}</pre>
+                    </div>
+                )}
             </div>
         </div>
     </div>
