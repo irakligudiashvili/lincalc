@@ -11,9 +11,9 @@ function App() {
 
   return (
     <div>
-      <nav>
-        <Link to="/" id="home">linCalc()</Link>
-        <Link to="/about">About</Link>
+      <nav className='bg-primary d-flex flex-row justify-content-between align-items-center mx-auto mt-3 px-4 rounded-4 container'>
+        <Link to="/" id="home" className='my-2 fs-1 link-underline link-underline-opacity-0 text-light'>linCalc()</Link>
+        <Link to="/about" className='link-underline link-underline-opacity-0 text-light fs-5'>About</Link>
       </nav>
 
       <Routes>
