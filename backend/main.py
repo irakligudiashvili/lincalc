@@ -22,20 +22,21 @@ app.add_middleware(
 class MatrixRequest(BaseModel):
     matrix1: list[list[float]]
     matrix2: list[list[float]]
-    operation: str
+    # operation: Optional[str] = None
 
 @app.get("/")
 def root():
     return {"Hello": "World"}
 
 @app.post("/arithmetic")
-async def arithmetic_operation(request: MatrixRequest):
+async def arithmetic_operation(request: MatrixRequest, operation):
+    print("Received: ", request.matrix1, request.matrix2, operation)
     if len(request.matrix1) != len(request.matrix2) or len(request.matrix1[0]) != len(request.matrix2[0]):
         raise HTTPException(status_code=400, detail="Matrices must have the same dimensions")
     
-    if request.operation == "add":
+    if operation == "add":
         result = add_matrices(request.matrix1, request.matrix2)
-    elif request.operation == "subtract":
+    elif operation == "subtract":
         result = subtract_matrices(request.matrix1, request.matrix2)
     else:
         raise HTTPException(status_code=400, detail="Invalid operation")
@@ -44,9 +45,11 @@ async def arithmetic_operation(request: MatrixRequest):
 
 @app.post("/multiplication")
 async def multiplication_operation(request: MatrixRequest):
+    print("Received: ", request.matrix1, request.matrix2)
     if len(request.matrix1[0]) != len(request.matrix2):
         raise HTTPException(status_code=400, detail="Numver of columns in matrix1 must match the number of rows in matrix2")
 
     result = multiply(request.matrix1, request.matrix2)
 
+    print("Result: ", result)
     return {"result": result}
