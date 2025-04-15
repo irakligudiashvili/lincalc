@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from arithmetic import add_matrices, subtract_matrices
+from multiplication import multiply
 
 app = FastAPI()
 
@@ -39,4 +40,13 @@ async def arithmetic_operation(request: MatrixRequest):
     else:
         raise HTTPException(status_code=400, detail="Invalid operation")
     
+    return {"result": result}
+
+@app.post("/multiplication")
+async def multiplication_operation(request: MatrixRequest):
+    if len(request.matrix1[0]) != len(request.matrix2):
+        raise HTTPException(status_code=400, detail="Numver of columns in matrix1 must match the number of rows in matrix2")
+
+    result = multiply(request.matrix1, request.matrix2)
+
     return {"result": result}
