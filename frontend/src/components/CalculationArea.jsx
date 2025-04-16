@@ -12,12 +12,12 @@ function CalculationArea({selectedCalculation}){
             case 'inversion':
                 return <Inversion />;
             default:
-                return <div>Select a calculation</div>
+                return <div className="container fs-3 text-center py-5 text-primary">Select a calculation</div>
 
         }
     }
 
-    return <div className="bg-primary bg-gradient col-8">
+    return <div className="bg-secondary bg-gradient col-8 h-100 rounded-4">
         {renderCalculation()}
     </div>
 }

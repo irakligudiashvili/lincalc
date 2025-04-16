@@ -16,11 +16,11 @@ function Arithmetic(){
     const addRowMatrix1 = () => {
         setMatrix1Rows(prev => prev + 1);
         setMatrix1(prevMatrix => {
-          const newMatrix = [...prevMatrix];
-          newMatrix.push(Array(matrix1Cols).fill(''));
-          return newMatrix;
+            const newMatrix = [...prevMatrix];
+            newMatrix.push(Array(matrix1Cols).fill(''));
+            return newMatrix;
         });
-      };
+    };
     const addColumnMatrix1 = () => setMatrix1Cols((prev) => prev + 1);
     const removeRowMatrix1 = () => {
         if(matrix1Rows > 1){
@@ -36,11 +36,11 @@ function Arithmetic(){
     const addRowMatrix2 = () => {
         setMatrix2Rows(prev => prev + 1);
         setMatrix2(prevMatrix => {
-          const newMatrix = [...prevMatrix];
-          newMatrix.push(Array(matrix2Cols).fill(''));
-          return newMatrix;
+            const newMatrix = [...prevMatrix];
+            newMatrix.push(Array(matrix2Cols).fill(''));
+            return newMatrix;
         });
-      };
+    };
     const addColumnMatrix2 = () => setMatrix2Cols((prev) => prev + 1);
     const removeRowMatrix2 = () => {
         if(matrix2Rows > 1){
@@ -109,10 +109,11 @@ function Arithmetic(){
             const requestData = {
                 matrix1: matrix1,
                 matrix2: matrix2,
-                operation: operation,
             };
 
-            fetch("http://127.0.0.1:8000/arithmetic", {
+            console.log("Request data: ", requestData);
+
+            fetch(`http://127.0.0.1:8000/arithmetic?operation=${encodeURIComponent(operation)}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -134,7 +135,7 @@ function Arithmetic(){
 
     return <div className="container d-flex flex-column justify-content-center align-items-center py-3">
         {/* Matrix 1 */}
-        <div className="border-3 border-start border-end border-dark rounded-pill px-5 py-3">
+        <div className="px-5 py-3">
             {Array.from({ length: matrix1Rows }).map((_, rowIndex) => (
                 <div className="d-flex py-2" key={`row1-${rowIndex}`}>
                     {Array.from({ length: matrix1Cols }).map((_, colIndex) => (
@@ -170,7 +171,7 @@ function Arithmetic(){
         </div>
 
         {/* Matrix 2 */}
-        <div className="border-3 border-start border-end border-dark rounded-pill px-5 py-3">
+        <div className="px-5 py-3">
             {Array.from({ length: matrix2Rows }).map((_, rowIndex) => (
                 <div className="d-flex py-2" key={`row1-${rowIndex}`}>
                     {Array.from({ length: matrix2Cols }).map((_, colIndex) => (
@@ -206,9 +207,9 @@ function Arithmetic(){
             <h3 className="py-3">Result</h3>
 
             {/* Result Matrix */}
-            <div className="border-3 border-start border-end border-dark rounded-pill px-5 py-3">
+            <div className="px-5 py-3">
                 {result && Array.isArray(result) ? (
-                    <table className="table table-bordered table-striped text-center">
+                    <table className="table table-bordered text-center">
                         <tbody>
                             {result.map((row, rowIndex) => (
                                 <tr key={`result-row-${rowIndex}`}>
