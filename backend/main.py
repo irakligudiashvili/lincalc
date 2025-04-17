@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from arithmetic import add_matrices, subtract_matrices
 from multiplication import multiply
+from flask import jsonify
 
 app = FastAPI()
 
@@ -22,7 +23,6 @@ app.add_middleware(
 class MatrixRequest(BaseModel):
     matrix1: list[list[float]]
     matrix2: list[list[float]]
-    # operation: Optional[str] = None
 
 @app.get("/")
 def root():
@@ -41,7 +41,8 @@ async def arithmetic_operation(request: MatrixRequest, operation):
     else:
         raise HTTPException(status_code=400, detail="Invalid operation")
     
-    return {"result": result}
+    print("Result: ", result.tolist())
+    return {"result": result.tolist()}
 
 @app.post("/multiplication")
 async def multiplication_operation(request: MatrixRequest):
@@ -51,5 +52,5 @@ async def multiplication_operation(request: MatrixRequest):
 
     result = multiply(request.matrix1, request.matrix2)
 
-    print("Result: ", result)
-    return {"result": result}
+    print("Result: ", result.tolist())
+    return {"result": result.tolist()}
