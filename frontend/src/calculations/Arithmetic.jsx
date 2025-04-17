@@ -122,6 +122,8 @@ function Arithmetic(){
             })
             .then((response) => response.json())
             .then((data) => {
+                console.log("Data: ", data)
+                console.log("Result: ", data.result)
                 setResult(data.result)
             })
             .catch((error) => {
