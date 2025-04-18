@@ -29,7 +29,7 @@ function Inversion(){
             setResult('Error: The number of Matrix 1 columns must match the number of Matrix 2 rows')
         }
     }
-
+    
     return <>
         <div className="container d-flex flex-column align-items-center py-3">
             <MatrixInput matrixHook={matrix1} name="matrix1" />

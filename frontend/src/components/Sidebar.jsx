@@ -9,6 +9,8 @@ function Sidebar({setSelectedCalculation}){
     
             <Dropper title="Determinant" optionTitles={["2x2 Matrix", "3x3 Matrix"]} optionValues={["determinant2x2", "determinant3x3"]} onSelect={setSelectedCalculation}/>
             <Dropper title="Inversion" optionTitles={["2x2 Matrix", "3x3 Matrix"]} optionValues={["inversion2x2", "inversion3x3"]} onSelect={setSelectedCalculation} />
+            
+            <button onClick={() => setSelectedCalculation("test")} className="cursor-pointer list-group-item my-2 py-2 fs-5 ps-3 bg-primary text-light text-start">Testing Area</button>
         </div>
     );
 }
