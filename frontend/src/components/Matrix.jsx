@@ -1,43 +1,4 @@
-import { useState } from "react";
-
-function Matrix({
-    rows,
-    cols,
-    matrix,
-    onMatrixChange,
-    onAddRow,
-    onRemoveRow,
-    onAddCol,
-    onRemoveCol,
-}){
-    // const [rows, setRows] = useState(2);
-    // const [cols, setCols] = useState(2);
-
-    // const [matrix, setMatrix] = useState(Array(rows).fill().map(() => Array(cols).fill('')));
-
-    // const addRow = () => {
-    //     setRows(prev => prev + 1);
-    //     setMatrix(prevMatrix => {
-    //         const newMatrix = [...prevMatrix];
-    //         newMatrix.push(Array(cols).fill(''));
-    //         return newMatrix;
-    //     });
-    // }
-
-    // const removeRow = () => {
-    //     if(rows > 1){
-    //         setRows(prev => prev - 1);
-    //     }
-    // }
-
-    // const addCol = () => {
-    //     setCols(prev => prev + 1);
-    // }
-
-    // const removeCol = () => {
-    //     setCols(prev => prev - 1);
-    // }
-
+function Matrix({ matrix, onMatrixChange, onAddRow, onRemoveRow, onAddCol, onRemoveCol,}){
     const handleMatrixChange = (rowIndex, colIndex, value) => {
         const newMatrix = matrix.map((row, rIndex) =>
             rIndex === rowIndex
