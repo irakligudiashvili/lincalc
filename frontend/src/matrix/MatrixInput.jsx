@@ -1,4 +1,4 @@
-export default function MatrixInput({ matrixHook, name }){
+export default function MatrixInput({ matrixHook, name, canEdit = true }){
     const {
         matrix,
         rows,
@@ -24,7 +24,7 @@ export default function MatrixInput({ matrixHook, name }){
                     ))}
                 </div>
             ))}
-
+        {canEdit && (
             <div className="d-flex justify-content-between py-2">
                 <div>
                     <button onClick={addRow} className="btn btn-success btn-sm">Add Row</button>
@@ -35,6 +35,7 @@ export default function MatrixInput({ matrixHook, name }){
                     <button onClick={removeCol} className="btn btn-danger btn-sm mx-3">Remove Column</button>
                 </div>
             </div>
+        )}
         </div>
     )
 }

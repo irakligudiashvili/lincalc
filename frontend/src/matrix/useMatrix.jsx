@@ -5,7 +5,7 @@ export function useMatrix(initialRows = 2, initialCols = 2){
     const [cols, setCols] = useState(initialCols);
 
     const [matrix, setMatrix] = useState(() =>
-        Array(initialRows).fill().map(() => Array(initialCols).fill(''))
+        Array(initialRows).fill().map(() => Array(initialCols).fill('0'))
     )
 
     useEffect(() => {
