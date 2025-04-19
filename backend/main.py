@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from arithmetic import add_matrices, subtract_matrices
 from multiplication import multiply
-from flask import jsonify
+from determinant import determinant2x2, determinant3x3
 
 app = FastAPI()
 
@@ -54,3 +54,21 @@ async def multiplication_operation(request: MatrixRequest):
 
     print("Result: ", result.tolist())
     return {"result": result.tolist()}
+
+@app.post("/determinant2x2")
+async def determinant_2x2_operation(request: MatrixRequest):
+    print("Received: ", request.matrix1)
+    
+    result = round(determinant2x2(request.matrix1), 10)
+    
+    print("Result: ", result)
+    return {"result": result}
+
+@app.post("/determinant3x3")
+async def determinant_2x2_operation(request: MatrixRequest):
+    print("Received: ", request.matrix1)
+
+    result = round(determinant3x3(request.matrix1), 10)
+
+    print("Result: ", result)
+    return {"result": result}
