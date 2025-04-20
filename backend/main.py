@@ -4,6 +4,8 @@ from pydantic import BaseModel
 from arithmetic import add_matrices, subtract_matrices
 from multiplication import multiply
 from determinant import determinant2x2, determinant3x3
+from inversion import inversion
+from numpy.linalg import LinAlgError
 
 app = FastAPI()
 
@@ -11,6 +13,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
+        "http://127.0.0.1:5173",
         "http://127.0.0.1:8000",
         "http://localhost:8000",
         "*"
@@ -70,5 +73,20 @@ async def determinant_2x2_operation(request: MatrixRequest):
 
     result = round(determinant3x3(request.matrix1), 10)
 
+    print("Result: ", result)
+    return {"result": result}
+
+@app.post("/inversion")
+async def inversion_operation(request: MatrixRequest):
+    print("Received: ", request.matrix1)
+    
+    try:
+        result = inversion(request.matrix1)
+        print("Result: ", result.tolist())
+        return {"result": result.tolist()}
+    except LinAlgError:
+        result = "Matrix is singular, cannot be inverted"
+    
+    
     print("Result: ", result)
     return {"result": result}
