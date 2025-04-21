@@ -29,13 +29,17 @@ function Multiplication(){
         }
     }
 
-    return <div className="container d-flex flex-column align-items-center py-3">
-        <MatrixInput matrixHook={matrix1} name="matrix1" />
-        <MatrixInput matrixHook={matrix2} name="matrix2" />
+    return <div className="d-flex flex-column"> 
+        <div className="bg-secondary rounded-4 d-flex flex-column justify-content-center align-items-center py-3">
+            <h2 className="w-100 px-5">Multiplication</h2>
+            <MatrixInput matrixHook={matrix1} name="matrix1" />
+            <MatrixInput matrixHook={matrix2} name="matrix2" />
 
-        <button className="btn btn-info" onClick={generateResult} disabled={!matrix1.isFilled() || !matrix2.isFilled() || matrix1.cols !== matrix2.rows}>
-            Calc()
-        </button>
+            <button className="btn btn-info" onClick={generateResult} disabled={!matrix1.isFilled() || !matrix2.isFilled() || matrix1.cols !== matrix2.rows}>
+                Calc()
+            </button>
+
+        </div>
 
         <Result result={result} />
     </div>

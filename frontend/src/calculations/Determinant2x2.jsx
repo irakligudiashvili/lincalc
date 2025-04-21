@@ -29,15 +29,17 @@ function Determinant2x2(){
         }
     }
 
-    return <div className="container d-flex flex-column align-items-center py-3">
-        <h1>Determinant 2x2</h1>
+    return <div className="d-flex flex-column">
+        <div className="bg-secondary rounded-4 d-flex flex-column justify-content-center align-items-center py-3">
+            <h2 className="w-100 px-5">Determinant 2x2</h2>
 
-        <MatrixInput matrixHook={matrix1} name="matrix" canEdit={false} />
+            <MatrixInput matrixHook={matrix1} name="matrix" canEdit={false} />
 
-        <button className="btn btn-info" onClick={generateResult} disabled={!matrix1.isFilled()}>
-            Calc()
-        </button>
-
+            <button className="btn btn-info" onClick={generateResult} disabled={!matrix1.isFilled()}>
+                Calc()
+            </button>
+        </div>
+        
         <Result result={result} />
     </div>
 }

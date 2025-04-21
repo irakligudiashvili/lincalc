@@ -32,7 +32,7 @@ function CalculationArea({selectedCalculation}){
         }
     }
 
-    return <div className="bg-secondary bg-gradient col-8 h-100 rounded-4">
+    return <div className="bg-gradient col-8 h-100">
         {renderCalculation()}
     </div>
 }

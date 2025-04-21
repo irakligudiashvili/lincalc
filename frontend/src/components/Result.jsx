@@ -3,25 +3,30 @@ function Result({ result }){
         return null;
     }
     
-    return <div className="px-5 py-3">
-        <h3 className="py-3">Result</h3>
-        {Array.isArray(result) ? (
-            <table className="table table-bordered text-center">
-                <tbody>
-                    {result.map((row, i) => (
-                        <tr key={`result-row-${i}`}>
-                            {row.map((cell, j) => (
-                                <td key={`result-cell-${i}=${j}`}>{cell}</td>
-                            ))}
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        ) : (
-            <div>
-                <p>{result}</p>
-            </div>
-        )}
+    return <div className="bg-secondary rounded-4 d-flex flex-column justify-content-center align-items-center py-3 mt-5">
+        <h2 className="w-100 px-5">Result</h2>
+
+        <div className="d-flex align-items-center mt-3">
+            {Array.isArray(result) ? (
+                <table className="table table-bordered text-center">
+                    <tbody>
+                        {result.map((row, i) => (
+                            <tr key={`result-row-${i}`}>
+                                {row.map((cell, j) => (
+                                    <td key={`result-cell-${i}=${j}`}>{cell}</td>
+                                ))}
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            ) : result === 0 ? (
+                <p>Determinant = 0. The matrix is singular</p>
+            ) : (
+                <div>
+                    <p>{result}</p>
+                </div>
+            )}
+        </div>
     </div>
 }
 
