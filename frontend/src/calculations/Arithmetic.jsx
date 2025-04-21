@@ -41,7 +41,7 @@ function Arithmetic(){
             <MatrixInput matrixHook={matrix1} name="matrix1" />
 
             <div className="py-3">
-                <select value={operation} onChange={handleOperationChange}>
+                <select value={operation} onChange={handleOperationChange} className="form-select">
                     <option value={'add'}>Addition</option>
                     <option value={'subtract'}>Subtraction</option>
                 </select>
