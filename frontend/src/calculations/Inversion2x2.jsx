@@ -1,6 +1,7 @@
 import { useState } from "react"
 import MatrixInput from "../matrix/MatrixInput"
 import { useMatrix } from "../matrix/useMatrix"
+import Result from "../components/Result";
 
 function Inversion2x2(){
     const matrix1 = useMatrix();
@@ -37,26 +38,7 @@ function Inversion2x2(){
             Calc()
         </button>
 
-        {result && (
-            <div className="px-5 py-3">
-                <h3 className="py-3">Result</h3>
-                {Array.isArray(result) ? (
-                    <table className="table table-bordered text-center">
-                        <tbody>
-                            {result.map((row, i) => (
-                                <tr key={`result-row-${i}`}>
-                                    {row.map((cell, j) => (
-                                        <td key={`result-cell-${i}=${j}`}>{cell}</td>
-                                    ))}
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                ) : (
-                    <p>{result}</p>
-                )}
-            </div>
-        )}
+        <Result result={result} />
     </div>
 }
 
