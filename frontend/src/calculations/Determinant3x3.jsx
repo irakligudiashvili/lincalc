@@ -31,7 +31,7 @@ function Determinant3x3(){
 
     return <div className="d-flex flex-column">
         <div className="bg-secondary rounded-4 d-flex flex-column justify-content-center align-items-center py-3">
-            <h2 className="w-100 px-5">Arithmetic</h2>
+            <h2 className="w-100 px-5">Determinant 3x3</h2>
 
             <MatrixInput matrixHook={matrix1} name="matrix" canEdit={false} />
 
