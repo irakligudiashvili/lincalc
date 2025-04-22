@@ -4,6 +4,7 @@ import Determinant3x3 from "../calculations/Determinant3x3";
 import Inversion2x2 from "../calculations/Inversion2x2";
 import Inversion3x3 from "../calculations/Inversion3x3";
 import Multiplication from "../calculations/Multiplication";
+import Transpose from "../calculations/Transpose";
 import Test from "./Test";
 
 function CalculationArea({selectedCalculation}){
@@ -23,6 +24,8 @@ function CalculationArea({selectedCalculation}){
                 return <Inversion2x2 />
             case 'inversion3x3':
                 return <Inversion3x3 />
+            case 'transpose':
+                return <Transpose />
             case 'test':
                 return <Test />
             default:
