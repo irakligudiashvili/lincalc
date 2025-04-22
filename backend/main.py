@@ -1,11 +1,12 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from numpy.linalg import LinAlgError
 from pydantic import BaseModel
 from arithmetic import add_matrices, subtract_matrices
 from multiplication import multiply
 from determinant import determinant2x2, determinant3x3
 from inversion import inversion
-from numpy.linalg import LinAlgError
+from transpose import transpose
 
 app = FastAPI()
 
@@ -90,3 +91,12 @@ async def inversion_operation(request: MatrixRequest):
     
     print("Result: ", result)
     return {"result": result}
+
+@app.post("/transpose")
+async def transpose_operation(request: MatrixRequest):
+    print("Received: ", request.matrix1)
+
+    result = transpose(request.matrix1)
+
+    print("Result: ", result.tolist())
+    return {"result": result.tolist()}
