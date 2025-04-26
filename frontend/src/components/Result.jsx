@@ -1,4 +1,4 @@
-function Result({ result }){
+function Result({ result, customMsg }){
     if (result == null){
         return null;
     }
@@ -19,6 +19,8 @@ function Result({ result }){
                         ))}
                     </tbody>
                 </table>
+            ) : result === 0 && customMsg ? (
+                <p>{customMsg}</p>
             ) : result === 0 ? (
                 <p>Determinant = 0. The matrix is singular</p>
             ) : (
