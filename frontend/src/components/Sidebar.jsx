@@ -12,6 +12,7 @@ function Sidebar({setSelectedCalculation}){
             
             <button onClick={() => setSelectedCalculation("transpose")} className="cursor-pointer list-group-item my-2 py-2 fs-5 ps-3 bg-primary text-light text-start w-100">Transpose</button>
             <button onClick={() => setSelectedCalculation("coordinates")} className="cursor-pointer list-group-item my-2 py-2 fs-5 ps-3 bg-primary text-light text-start w-100">Vector Coordinates</button>
+            <button onClick={() => setSelectedCalculation("magnitude")} className="cursor-pointer list-group-item my-2 py-2 fs-5 ps-3 bg-primary text-light text-start w-100">Magnitude</button>
             <button onClick={() => setSelectedCalculation("test")} className="cursor-pointer list-group-item my-2 py-2 fs-5 ps-3 bg-primary text-light text-start w-100">Testing Area</button>
         </div>
     );
