@@ -8,6 +8,7 @@ from determinant import determinant2x2, determinant3x3
 from inversion import inversion
 from transpose import transpose
 from coordinates import add_vectors, subtract_vectors
+from magnitude import magnitude
 
 app = FastAPI()
 
@@ -115,5 +116,14 @@ async def coordinates_operation(request: MatrixRequest, operation):
     else:
         raise HTTPException(status_code=400, detail="Invalid operation")
     
+    print("Result: ", result.tolist())
+    return {"result": result.tolist()}
+
+@app.post("/magnitude")
+async def magnitude_operation(request: MatrixRequest):
+    print("Received: ", request.matrix1)
+
+    result = magnitude(request.matrix1)
+
     print("Result: ", result.tolist())
     return {"result": result.tolist()}
