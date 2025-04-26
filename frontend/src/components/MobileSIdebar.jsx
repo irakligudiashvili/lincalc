@@ -23,6 +23,7 @@ function MobileSidebar() {
             <button className="btn btn-sm btn-outline-primary w-100 my-1 text-start" onClick={() => handleSelect("transpose")}>Transpose</button>
             <button className="btn btn-sm btn-outline-primary w-100 my-1 text-start" onClick={() => handleSelect("coordinates")}>Vector Coordinates</button>
             <button className="btn btn-sm btn-outline-primary w-100 my-1 text-start" onClick={() => handleSelect("magnitude")}>Magnitude</button>
+            <button className="btn btn-sm btn-outline-primary w-100 my-1 text-start" onClick={() => handleSelect("dotProduct")}>Dot Product</button>
         </>
     );
 }
