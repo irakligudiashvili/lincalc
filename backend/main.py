@@ -7,6 +7,7 @@ from multiplication import multiply
 from determinant import determinant2x2, determinant3x3
 from inversion import inversion
 from transpose import transpose
+from coordinates import add_vectors, subtract_vectors
 
 app = FastAPI()
 
@@ -98,5 +99,21 @@ async def transpose_operation(request: MatrixRequest):
 
     result = transpose(request.matrix1)
 
+    print("Result: ", result.tolist())
+    return {"result": result.tolist()}
+
+@app.post("/coordinates")
+async def coordinates_operation(request: MatrixRequest, operation):
+    print("Received: ", request.matrix1, request.matrix2, operation)
+    if len(request.matrix1) != len(request.matrix2):
+        raise HTTPException(status_code=400, detail="Vectors must have the same length")
+    
+    if operation == "add":
+        result = add_vectors(request.matrix1, request.matrix2)
+    elif operation == "subtract":
+        result = subtract_vectors(request.matrix1, request.matrix2)
+    else:
+        raise HTTPException(status_code=400, detail="Invalid operation")
+    
     print("Result: ", result.tolist())
     return {"result": result.tolist()}
