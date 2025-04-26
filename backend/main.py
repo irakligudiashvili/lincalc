@@ -9,6 +9,7 @@ from inversion import inversion
 from transpose import transpose
 from coordinates import add_vectors, subtract_vectors
 from magnitude import magnitude
+from dotProduct import dotProduct
 
 app = FastAPI()
 
@@ -124,6 +125,15 @@ async def magnitude_operation(request: MatrixRequest):
     print("Received: ", request.matrix1)
 
     result = magnitude(request.matrix1)
+
+    print("Result: ", result.tolist())
+    return {"result": result.tolist()}
+
+@app.post("/dotproduct")
+async def dotproduct_operation(request: MatrixRequest, angle):
+    print("Received: ", request.matrix1, request.matrix2, angle)
+
+    result = dotProduct(request.matrix1, request.matrix2, angle)
 
     print("Result: ", result.tolist())
     return {"result": result.tolist()}
