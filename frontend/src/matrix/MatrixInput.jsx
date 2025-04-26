@@ -1,4 +1,4 @@
-export default function MatrixInput({ matrixHook, name, canEdit = true }){
+export default function MatrixInput({ matrixHook, name, canEdit = true, rowEdit = true, colEdit = true }){
     const {
         matrix,
         rows,
@@ -28,16 +28,19 @@ export default function MatrixInput({ matrixHook, name, canEdit = true }){
                 ))}
                 {canEdit && (
                     <div className="d-flex">
-                        <div className="d-flex justify-content-center mt-2">
-                            <button onClick={addRow} className="btn btn-success bg-gradient btn-sm border-0 mx-2">Row: +</button>
-                            <button onClick={removeRow} className="btn btn-danger bg-gradient btn-sm border-0 mx-2">Row: -</button>
-                        </div>
+                        {rowEdit && (
+                            <div className="d-flex justify-content-center mt-2">
+                                <button onClick={addRow} className="btn btn-success bg-gradient btn-sm border-0 mx-2">Row: +</button>
+                                <button onClick={removeRow} className="btn btn-danger bg-gradient btn-sm border-0 mx-2">Row: -</button>
+                            </div>
+                        )}
 
-                        
-                        <div className="d-flex justify-content-center mt-2">
-                            <button onClick={addCol} className="btn btn-success bg-gradient btn-sm border-0 mx-2">Col: +</button>
-                            <button onClick={removeCol} className="btn btn-danger bg-gradient btn-sm border-0 mx-2">Col: -</button>
-                        </div>
+                        {colEdit && (
+                            <div className="d-flex justify-content-center mt-2">
+                                <button onClick={addCol} className="btn btn-success bg-gradient btn-sm border-0 mx-2">Col: +</button>
+                                <button onClick={removeCol} className="btn btn-danger bg-gradient btn-sm border-0 mx-2">Col: -</button>
+                            </div>
+                        )}
                     </div>
                 )}
             </div>

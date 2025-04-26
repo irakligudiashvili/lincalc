@@ -21,6 +21,7 @@ function MobileSidebar() {
             <button className="btn btn-sm btn-outline-primary w-100 my-1 text-start" onClick={() => handleSelect("inversion2x2")}>Inversion 2x2</button>
             <button className="btn btn-sm btn-outline-primary w-100 my-1 text-start" onClick={() => handleSelect("inversion3x3")}>Inversion 3x3</button>
             <button className="btn btn-sm btn-outline-primary w-100 my-1 text-start" onClick={() => handleSelect("inversion3x3")}>Transpose</button>
+            <button className="btn btn-sm btn-outline-primary w-100 my-1 text-start" onClick={() => handleSelect("coordinates")}>Vector Coordinates</button>
         </>
     );
 }

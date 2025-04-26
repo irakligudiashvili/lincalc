@@ -1,4 +1,5 @@
 import Arithmetic from "../calculations/Arithmetic"
+import Coordinates from "../calculations/Coordinates";
 import Determinant2x2 from "../calculations/Determinant2x2";
 import Determinant3x3 from "../calculations/Determinant3x3";
 import Inversion2x2 from "../calculations/Inversion2x2";
@@ -26,6 +27,8 @@ function CalculationArea({selectedCalculation}){
                 return <Inversion3x3 />
             case 'transpose':
                 return <Transpose />
+            case 'coordinates':
+                return <Coordinates />
             case 'test':
                 return <Test />
             default:
