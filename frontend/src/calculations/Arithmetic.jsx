@@ -21,7 +21,7 @@ function Arithmetic(){
                 matrix2: matrix2.matrix.map(row => row.map(parseFloat)),
             };
 
-            fetch(`http://127.0.0.1:8000/arithmetic?operation=${encodeURIComponent(operation)}`, {
+            fetch(`https://lincalc.onrender.com/arithmetic?operation=${encodeURIComponent(operation)}`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(requestData)
