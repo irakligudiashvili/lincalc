@@ -16,7 +16,7 @@ function Multiplication(){
                 matrix2: matrix2.matrix.map(row => row.map(parseFloat)),
             }
 
-            fetch('http://127.0.0.1:8000/multiplication', {
+            fetch('https://lincalc.onrender.com/multiplication', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(requestData),

@@ -16,7 +16,7 @@ function Determinant2x2(){
                 matrix2: matrix2.matrix.map(row => row.map(parseFloat))
             }
 
-            fetch('http://127.0.0.1:8000/determinant2x2', {
+            fetch('https://lincalc.onrender.com/determinant2x2', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(requestData),

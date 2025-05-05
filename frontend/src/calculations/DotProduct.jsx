@@ -21,7 +21,7 @@ function DotProduct(){
                 matrix2: matrix2.matrix.map(row => row.map(parseFloat))
             };
 
-            fetch(`http://127.0.0.1:8000/dotproduct?angle=${encodeURIComponent(angle)}`, {
+            fetch(`https://lincalc.onrender.com/dotproduct?angle=${encodeURIComponent(angle)}`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(requestData)
