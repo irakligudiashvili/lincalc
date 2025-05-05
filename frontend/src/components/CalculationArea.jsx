@@ -35,8 +35,6 @@ function CalculationArea({selectedCalculation}){
                 return <Magnitude />
             case 'dotProduct':
                 return <DotProduct />
-            case 'test':
-                return <Test />
             default:
                 return <div className="bg-secondary rounded-4 d-flex flex-column justify-content-center align-items-center py-3">
                     <h2>Select a calculation</h2>
