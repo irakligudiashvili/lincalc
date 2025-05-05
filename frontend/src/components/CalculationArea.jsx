@@ -8,7 +8,6 @@ import Inversion3x3 from "../calculations/Inversion3x3";
 import Magnitude from "../calculations/Magnitude";
 import Multiplication from "../calculations/Multiplication";
 import Transpose from "../calculations/Transpose";
-import Test from "./Test";
 
 function CalculationArea({selectedCalculation}){
     const renderCalculation = () => {
