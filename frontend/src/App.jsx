@@ -29,9 +29,9 @@ function App() {
 
             {showMenu && (
               <div className="position-absolute end-0 mt-2 bg-light rounded shadow p-2">
-                <button className="btn btn-sm btn-outline-primary w-100 p-0" onClick={() => setShowMenu(false)}>
+                {/* <button className="btn btn-sm btn-outline-primary w-100 p-0" onClick={() => setShowMenu(false)}>
                   <Link to="/about" className="text-decoration-none btn btn-sm text-start w-100 d-block">About</Link>
-                </button>
+                </button> */}
 
                 <MobileSidebar />
               </div>
