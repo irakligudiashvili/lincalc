@@ -9,7 +9,12 @@ function Magnitude(){
 
     const [result, setResult] = useState(null);
 
+    const [isLoading, setIsLoading] = useState(false);
+
     const generateResult = () => {
+        setIsLoading(true);
+        setResult(null);
+
         if(matrix1.isFilled){
             const requestData = {
                 matrix1: matrix1.matrix.map(row => row.map(parseFloat)),
@@ -24,6 +29,7 @@ function Magnitude(){
             .then(res => res.json())
             .then(data => setResult(data.result))
             .catch(err => setResult(err.toString()))
+            .finally(setIsLoading(false))
         } else {
             setResult("An error has occurred")
         }
@@ -40,7 +46,7 @@ function Magnitude(){
             </button>
         </div>
 
-        <Result result={result} customMsg={"0"}/>
+        <Result result={result} customMsg={"0"} isLoading={isLoading} />
     </div>
 }
 

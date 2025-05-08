@@ -9,7 +9,12 @@ function Multiplication(){
 
     const [result, setResult] = useState(null);
 
+    const [isLoading, setIsLoading] = useState(false);
+
     const generateResult = () => {
+        setIsLoading(true);
+        setResult(null);
+
         if(matrix1.cols === matrix2.rows) {
             const requestData = {
                 matrix1: matrix1.matrix.map(row => row.map(parseFloat)),
@@ -23,7 +28,8 @@ function Multiplication(){
             })
             .then(res => res.json())
             .then(data => setResult(data.result))
-            .catch(err => setResult(err.toString()));
+            .catch(err => setResult(err.toString()))
+            .finally(setIsLoading(false))
         } else {
             setResult('Error: The number of Matrix 1 columns must match the number of Matrix 2 rows')
         }
@@ -41,7 +47,7 @@ function Multiplication(){
 
         </div>
 
-        <Result result={result} />
+        <Result result={result} isLoading={isLoading} />
     </div>
 }
 

@@ -10,11 +10,16 @@ function Coordinates(){
     const [result, setResult] = useState(null);
     const [operation, setOperation] = useState('add');
 
+    const [isLoading, setIsLoading] = useState(false);
+
     const handleOperationChange = (e) => {
         setOperation(e.target.value);
     }
 
     const generateResult = () => {
+        setIsLoading(true);
+        setResult(null);
+
         if(matrix1.cols == matrix2.cols){
             const requestData = {
                 matrix1: matrix1.matrix.map(row => row.map(parseFloat)),
@@ -31,7 +36,8 @@ function Coordinates(){
             })
             .then(res => res.json())
             .then((data) => setResult(data.result))
-            .catch(err => setResult(err));
+            .catch(err => setResult(err))
+            .finally(setIsLoading(false))
         } else {
             setResult('Error: Vector lengths do not match');
         }
@@ -57,7 +63,7 @@ function Coordinates(){
             </button>
         </div>
 
-        <Result result={result} />
+        <Result result={result} isLoading={isLoading} />
     </div>
 }
 
