@@ -1,4 +1,4 @@
-function Result({ result, customMsg }){
+function Result({ result, customMsg, isLoading }){
     if (result == null){
         return null;
     }
@@ -7,26 +7,30 @@ function Result({ result, customMsg }){
         <h2 className="w-100 px-5">Result</h2>
 
         <div className="d-flex align-items-center mt-3">
-            {Array.isArray(result) ? (
-                <table className="table table-bordered text-center">
-                    <tbody>
-                        {result.map((row, i) => (
-                            <tr key={`result-row-${i}`}>
-                                {row.map((cell, j) => (
-                                    <td key={`result-cell-${i}=${j}`}>{cell}</td>
-                                ))}
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            ) : result === 0 && customMsg ? (
-                <p>{customMsg}</p>
-            ) : result === 0 ? (
-                <p>Determinant = 0. The matrix is singular</p>
+            {isLoading ? (
+                <div className="text-center mt-3">Calculating...</div>
             ) : (
-                <div>
-                    <p>{result}</p>
-                </div>
+                Array.isArray(result) ? (
+                    <table className="table table-bordered text-center">
+                        <tbody>
+                            {result.map((row, i) => (
+                                <tr key={`result-row-${i}`}>
+                                    {row.map((cell, j) => (
+                                        <td key={`result-cell-${i}=${j}`}>{cell}</td>
+                                    ))}
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                ) : result === 0 && customMsg ? (
+                    <p>{customMsg}</p>
+                ) : result === 0 ? (
+                    <p>Determinant = 0. The matrix is singular</p>
+                ) : (
+                    <div>
+                        <p>{result}</p>
+                    </div>
+                )
             )}
         </div>
     </div>
