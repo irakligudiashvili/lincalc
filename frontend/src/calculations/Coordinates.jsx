@@ -17,10 +17,10 @@ function Coordinates(){
     }
 
     const generateResult = () => {
-        setIsLoading(true);
-        setResult(null);
-
         if(matrix1.cols == matrix2.cols){
+            setIsLoading(true);
+            setResult(null);
+            
             const requestData = {
                 matrix1: matrix1.matrix.map(row => row.map(parseFloat)),
                 matrix2: matrix2.matrix.map(row => row.map(parseFloat)),
