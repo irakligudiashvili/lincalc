@@ -1,5 +1,5 @@
 function Result({ result, customMsg, isLoading }){
-    if (result == null){
+    if (result == null && !isLoading){
         return null;
     }
     
